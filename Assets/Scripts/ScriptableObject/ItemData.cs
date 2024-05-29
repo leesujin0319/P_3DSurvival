@@ -7,14 +7,15 @@ public enum ItemType
 {
     Equipable,
     Consumable,
-    Resource // 단순 자원 ex) 돌 
+    Resource, // 단순 자원 ex) 돌 
 
 }
 
 public enum ConsumableType
 {
     Health,
-    Hunger
+    Hunger,
+    Stamina
 }
 
 [Serializable]
@@ -49,6 +50,4 @@ public class ItemData : ScriptableObject
 
     [Header("Equip")]
     public GameObject equipPrefab;
-
-
 }

@@ -6,6 +6,7 @@ public class JumpZone : MonoBehaviour
 {
     private Rigidbody rigidbody;
     private float power = 400f;
+    private float originpower = 80f;
 
     private void Start()
     {
@@ -20,7 +21,16 @@ public class JumpZone : MonoBehaviour
 
         if (collision.gameObject.tag=="JumpZone")
         {
-            rigidbody.AddForce(Vector2.up *power, ForceMode.Impulse);
+            rigidbody.AddForce(Vector2.up * power, ForceMode.Impulse);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+       CharacterManager.Instance.Player.controller.jumpPower = originpower;
+        if(collision.gameObject.tag=="JumpZone")
+        {
+            rigidbody.AddForce(Vector2.up * originpower, ForceMode.Impulse);
         }
     }
 }
