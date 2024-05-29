@@ -47,6 +47,24 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         hunger.Add(amount);
     }
 
+    public IEnumerator Running()
+    {
+        UseStamina(20);
+        float originalSpeed = CharacterManager.Instance.Player.controller.moveSpeed;
+        float upgrageSpeed = CharacterManager.Instance.Player.controller.moveSpeed * 2f; 
+
+        CharacterManager.Instance.Player.controller.moveSpeed = upgrageSpeed;
+
+        yield return new WaitForSeconds(5f);
+
+        CharacterManager.Instance.Player.controller.moveSpeed = originalSpeed;  
+    }
+
+    public void UseRun()
+    {
+        StartCoroutine(Running());
+    }
+
     public void Die()
     {
         Debug.Log("ав╬З╢ы!");

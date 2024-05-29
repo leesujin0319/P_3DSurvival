@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public ItemData itemData;
     public Action addItem;
 
+    public Transform dropPosition;
+
+
     private void Awake()
     {
         // 나 자신을 집어넣기 

@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look")]
     public Transform cameraContainer;
+    public Transform firstCamera;
+    public Transform secondCamera;
+
     // x의 회전범위 
     public float minXLook;
     public float maxXLook;
@@ -28,11 +31,12 @@ public class PlayerController : MonoBehaviour
     // 인벤토리 커서
     public bool canLook = true;
 
+
     public Action inventory;
-    private Rigidbody rd;
-
-
     private Rigidbody rb;
+
+
+    private bool isFirstPerson = true;
 
     private void Awake()
     {
@@ -161,6 +165,34 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void OnCamera(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ToggleCameraView();
+            CameraLook();
+        }
+
+    }
+
+    private void ToggleCameraView()
+    {
+        isFirstPerson = !isFirstPerson;
+
+        if (isFirstPerson)
+        {
+            // 다시 1인칭으로 
+            firstCamera.gameObject.SetActive(true);
+            secondCamera.gameObject.SetActive(false);
+        }
+        else
+        {
+            // 카메라 바뀌게 
+            firstCamera.gameObject.SetActive(false);
+            secondCamera.gameObject.SetActive(true);
+        }
     }
 
 }
