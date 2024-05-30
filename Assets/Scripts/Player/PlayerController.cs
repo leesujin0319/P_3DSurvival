@@ -174,7 +174,6 @@ public class PlayerController : MonoBehaviour
             ToggleCameraView();
             CameraLook();
         }
-
     }
 
     private void ToggleCameraView()
